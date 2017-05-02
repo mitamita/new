@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ja="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>Blog12</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+
+<div id="wrap">
+          <header id="header">
+                <div class="inner">
+                <h1 id="logo"><%= link_to "My Blog", posts_path %></h1>
+                </div><!-- /.inner -->
+          </header><!-- /#header -->
+
+           <div id="container">
+                     <div id="user_nav">
+                     <% if user_signed_in? %>
+                     Logged in as <strong><%= current_user.email %></strong>.
+                      <%= link_to 'プロフィール編集', edit_user_registration_path %> |
+                      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> |
+                      <%= link_to '新規投稿', new_post_path %> |
+                      <%= link_to 'トップ', posts_path %>
+                      <% else %>
+                      <%= link_to "新規登録", new_user_registration_path %> |
+                      <%= link_to "ログイン", new_user_session_path %>
+                      <% end %>
+                      </div><!-- /. user_nav-->
+
+            <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, id: "flash_#{name}" %>
+            <% end %>
+            </div><!-- /#container-->
+</div><!-- /#wrap -->
+
+  <div id="main">
+    <%= yield %>
+  </div><!-- /#main -->
+
+
+
+</body>
+</html>

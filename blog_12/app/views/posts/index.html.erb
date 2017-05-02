@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>☆投稿記事一覧☆</h1>
+
+
+  <body>
+
+    <% @posts.each do |post| %>
+<div class="unit">
+        <h2><%= post.title %></h2>
+        <p><%= post.text %></p>
+        <p>タグ: <%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+        <p><%= link_to '詳細', post %>
+      <%= link_to '編集', edit_post_path(post) %>
+      <%= link_to '削除', post, method: :delete, data: { confirm: '削除していいですか？' } %></p>
+</div>
+    <% end %>
+
+  </body>
